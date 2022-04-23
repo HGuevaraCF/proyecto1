@@ -27,7 +27,6 @@ h1 {
     cursor: pointer;
 }
 .addManualExpense{
-    margin: 1%;
     filter: none;
 }
 
@@ -43,4 +42,11 @@ h1 {
 }
 .expensesTable tr:nth-child(even){
     background-color: #caf0f8;
+}
+
+.modalContent{
+    position: fixed!important;
+    width: 40%;
+    right: 30%;
+    bottom: 25%;
 }
