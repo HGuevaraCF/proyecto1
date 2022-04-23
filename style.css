@@ -1,0 +1,11 @@
+#total{
+    border: solid 1px black;
+    width: 10rem;
+    height: 1rem;
+}
+.subtotals > div {
+
+border: solid 1px black;
+    width: 10rem;
+    height: 1rem;
+}
