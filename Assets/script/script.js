@@ -17,6 +17,7 @@ var addExpenseScreen = $('#addManualExpense');
 var calendarScreen = $('#calendarScreen');
 var financialScreen = $('#financialScreen');
 var helpScreen = $('#helpScreen');
+var Screens = $('.screen');
 
 
 
@@ -34,76 +35,30 @@ function collapsibleSidebar() {
 
 }
 
-$('#sbHomeBtn').on('click', function (event) {
-    homeScreen.show();
-    dashboardScreen.hide();
-    scanScreen.hide();
-    addExpenseScreen.hide();
-    calendarScreen.hide();
-    financialScreen.hide();
-    helpScreen.hide();
+$('.sbBtn').on('click', function() {
     collapsibleSidebar();
-});
-
-$('#sbDashboardBtn').on('click', function (event) {
-    homeScreen.hide();
-    dashboardScreen.show();
-    scanScreen.hide();
-    addExpenseScreen.hide();
-    calendarScreen.hide();
-    financialScreen.hide();
-    helpScreen.hide();
-    collapsibleSidebar();
-});
-$('#sbScanBtn').on('click', function (event) {
-    homeScreen.hide();
-    dashboardScreen.hide();
-    scanScreen.show();
-    addExpenseScreen.hide();
-    calendarScreen.hide();
-    financialScreen.hide();
-    helpScreen.hide();
-    collapsibleSidebar();
-});
-$('#sbAddExpenseBtn').on('click', function (event) {
-    homeScreen.hide();
-    dashboardScreen.hide();
-    scanScreen.hide();
-    addExpenseScreen.show();
-    calendarScreen.hide();
-    financialScreen.hide();
-    helpScreen.hide();
-    collapsibleSidebar();
-});
-$('#sbCalendarBtn').on('click', function (event) {
-    homeScreen.hide();
-    dashboardScreen.hide();
-    scanScreen.hide();
-    addExpenseScreen.hide();
-    calendarScreen.show();
-    financialScreen.hide();
-    helpScreen.hide();
-    collapsibleSidebar();
-});
-$('#sbFinancialBtn').on('click', function (event) {
-    homeScreen.hide();
-    dashboardScreen.hide();
-    scanScreen.hide();
-    addExpenseScreen.hide();
-    calendarScreen.hide();
-    financialScreen.show();
-    helpScreen.hide();
-    collapsibleSidebar();
-});
-$('#sbHelpBtn').on('click', function (event) {
-    homeScreen.hide();
-    dashboardScreen.hide();
-    scanScreen.hide();
-    addExpenseScreen.hide();
-    calendarScreen.hide();
-    financialScreen.hide();
-    helpScreen.show();
-    collapsibleSidebar();
+    Screens.hide();
+    var optionButton = $(this).attr('id');
+    switch (optionButton) {
+        case 'sbDashboardBtn':
+            dashboardScreen.show();
+            break;
+        case 'sbScanBtn':
+            scanScreen.show();
+            break;
+        case 'sbAddExpenseBtn':
+            addExpenseScreen.show();
+            break;
+        case 'sbCalendarBtn':
+            calendarScreen.show();
+            break;
+        case 'sbFinancialBtn':
+            financialScreen.show();
+            break;
+        case 'sbHelpBtn':
+            helpScreen.show();
+            break;
+    }
 });
 
 
@@ -162,12 +117,7 @@ expenseTableBody.on('click', '.deleteRowBtn', deleteExpense);
 
 
 $(document).ready(function () {
-    homeScreen.show();
-    addExpenseScreen.hide();
-    dashboardScreen.hide();
-    scanScreen.hide();
-    calendarScreen.hide();
-    financialScreen.hide();
-    helpScreen.hide();
+    Screens.hide();
+    addExpenseScreen.show();
 })
 

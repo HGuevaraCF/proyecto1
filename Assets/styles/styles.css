@@ -37,7 +37,7 @@ h1 {
     border-radius: 2px;
 }
 .expensesTable td, .expensesTable th{
-    border: 1px solid #ddd;
+    border: 1px solid #219ebc;
     padding: 8px;
 }
 .expensesTable tr:nth-child(even){

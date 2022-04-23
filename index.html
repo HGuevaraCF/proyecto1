@@ -9,25 +9,25 @@
    <title>Proyecto 1</title>
 </head>
 
-<body>
-   <!-----Sidebar------>
+<body class="bg-slate-300">
+<!-----Sidebar------>
    <div class="sidebar w-0" id="sidebar" aria-label="Sidebar">
       <div class="overflow-y-auto py-4 px-3 bg-blue-800 rounded ">
          <ul class="space-y-2">
             <li>
-               <a href="#" id="sbHomeBtn"
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <a href="#" id="sbAddExpenseBtn"
+                  class=" sbBtn flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" stroke-width="2">
                      <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
-                  <span class="ml-3">Home</span>
+                  <span class="ml-3">Add expense</span>
                </a>
             </li>
             <li>
                <a href="#" id="sbDashboardBtn"
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                  class=" sbBtn flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" stroke-width="2">
                      <path stroke-linecap="round" stroke-linejoin="round"
@@ -38,7 +38,7 @@
             </li>
             <li>
                <a href="#" id="sbScanBtn"
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                  class=" sbBtn flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" stroke-width="2">
                      <path stroke-linecap="round" stroke-linejoin="round"
@@ -49,19 +49,8 @@
                </a>
             </li>
             <li>
-               <a href="#" id="sbAddExpenseBtn"
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor" stroke-width="2">
-                     <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                  </svg>
-                  <span class="ml-3">Add expense</span>
-               </a>
-            </li>
-            <li>
                <a href="#" id="sbCalendarBtn"
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                  class=" sbBtn flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" stroke-width="2">
                      <path stroke-linecap="round" stroke-linejoin="round"
@@ -72,7 +61,7 @@
             </li>
             <li>
                <a href="#" id="sbFinancialBtn"
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                  class=" sbBtn flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" stroke-width="2">
                      <path stroke-linecap="round" stroke-linejoin="round"
@@ -83,7 +72,7 @@
             </li>
             <li>
                <a href="#" id="sbHelpBtn"
-                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                  class=" sbBtn flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" stroke-width="2">
                      <path stroke-linecap="round" stroke-linejoin="round"
@@ -103,10 +92,10 @@
          </svg></button>
    </div>
 
-<!-----Add Manual Expense------>
-   <div class="addManualExpense m-1" id="addManualExpense">
+<!-----Add Manual Expense screen------>
+   <div class="addManualExpense m-1 screen" id="addManualExpense">
       <div class="body">
-         <div class="Expenses text-black max-w-md ">
+         <div class="Expenses text-black">
             <div class=" ExpensesHeader ">
                <h1 class="cardHeader">Expenses</h1>
                <p>Click the button to add a new expense</p>
@@ -171,6 +160,20 @@
                      <input type="text" id="expensePlace" placeholder="Market" required>
                   </div>
                   <div>
+                  <div>
+                     <label>Category</label>
+                     <!-- <input type="text" id="expensePlace" placeholder="Market" required> -->
+                     <select class="form-control" id="expensePlace">
+                        <option selected disabled>Pick one...</option>
+                        <option value="Web Application (Front End)">Web Application (Front End)</option>
+                        <option value="Web Application (Back End)">Web Application (Back End)</option>
+                        <option value="Web Application (Full Stack)">Web Application (Full Stack)</option>
+                        <option value="Mobile Application">Mobile Application</option>
+                        <option value="Print Campaign">Print Campaign</option>
+                        <option value="Digital Marketing Campaign">Digital Marketing Campaign</option>
+                      </select>
+                  </div>
+                  <div>
                      <label>Amount</label>
                      <input type="number" id="expenseAmount" placeholder="$" min="0.0" required>
                   </div>
@@ -187,28 +190,24 @@
          </div>
       </div>
    </div>
-<!--------Home Screen----------->
-   <div class="homeScreen" id="homeScreen">
-      <p>Home Screen</p>
-   </div>
 <!--------Financial Tips----------->
-   <div class="homeScreen" id="financialScreen">
+   <div class="financialScreen screen" id="financialScreen">
       <p>Financial tips</p>
    </div>
 <!--------Scan Ticket----------->
-   <div class="homeScreen" id="scanScreen">
+   <div class="scanScreen screen" id="scanScreen">
       <p>Scan Ticket</p>
    </div>
 <!--------Dashboard----------->
-   <div class="homeScreen" id="dashboardScreen">
+   <div class="dashboardScreen screen" id="dashboardScreen">
       <p>Dashboard</p>
    </div>
 <!--------Calendar View----------->
-   <div class="homeScreen" id="calendarScreen">
+   <div class="calendarScreen screen" id="calendarScreen">
       <p>Calendar View</p>
    </div>
 <!--------Help----------->
-   <div class="homeScreen" id="helpScreen">
+   <div class="helpScreen screen" id="helpScreen">
       <p>Help</p>
    </div>
 
