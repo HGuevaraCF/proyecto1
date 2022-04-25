@@ -84,14 +84,13 @@
          </ul>
       </div>
    </div>
-   <!-----Sidebar Trigger Btn------>
+<!-----Sidebar Trigger Btn------>
    <div class="sidebarBtn" id="main">
       <button class="open" onclick="collapsibleSidebar()"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
             fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
          </svg></button>
    </div>
-
 <!-----Add Manual Expense screen------>
    <div class="addManualExpense m-1 screen" id="addManualExpense">
       <div class="body">
@@ -104,6 +103,7 @@
                <table class="expensesTable">
                   <thead class="dark:bg-blue-600 text-white">
                      <tr>
+                        <th class="item">Expense Category</th>
                         <th class="item">Expense date</th>
                         <th class="item">Description</th>
                         <th class="item">Place</th>
@@ -123,8 +123,7 @@
          </div>
       </div>
    </div>
-
-   <!-----Modal------>
+<!-----Modal------>
    <div id="defaultModal"
       class="modal overflow-y-auto overflow-x-hidden  w-full md:inset-0 h-modal md:h-full">
       <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
@@ -163,7 +162,7 @@
                   <div>
                      <label>Category</label>
                      <!-- <input type="text" id="expensePlace" placeholder="Market" required> -->
-                     <select class="form-control" id="expensePlace">
+                     <select class="form-control" id="expenseCategory">
                         <option selected disabled aria-placeholder="pick one">Pick one...</option>
                         <option value="Groceries">Groceries</option>
                         <option value="Restaurants">Restaurants</option>
@@ -195,6 +194,7 @@
 <!--------Scan Ticket----------->
    <div class="scanScreen screen" id="scanScreen">
       <p>Scan Ticket</p>
+      <img src="https://t3.ftcdn.net/jpg/03/44/17/18/360_F_344171869_h3nxznW93zBoOLuMeIJ3Q3xzanFSN8vu.jpg" alt="Site under construction" width="100px" height="100px">
    </div>
 <!--------Dashboard----------->
    <div class="dashboardScreen screen" id="dashboardScreen">

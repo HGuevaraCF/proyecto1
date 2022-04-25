@@ -1,9 +1,10 @@
 let collapsed = true;
 var modalFrame = $('#defaultModal');
 var openModalBtn = $('#expenseModalBtn');
-var closeModalBtnX = $('#closeModalBtnX')
-var closeModalBtnCancel = $('#closeModalBtnCancel')
+var closeModalBtnX = $('#closeModalBtnX');
+var closeModalBtnCancel = $('#closeModalBtnCancel');
 var expenseDateInput = $('#expenseDate');
+var expenseCategoryInput = $('#expenseCategory');
 var expenseDescriptionInput = $('#expenseDescription');
 var expensePlaceInput = $('#expensePlace');
 var expenseAmountInput = $('#expenseAmount');
@@ -76,28 +77,30 @@ function modalFrameBehaviour() {
 
 
 //---------Add Expense from modal------------//
-function AddExpense(date, description, place, amount) {
+function AddExpense(category, date, description, place, amount) {
     var expenseRow = $('<tr>');
+    var expenseCategory = $('<td>').text(category)
     var expenseDate = $('<td>').text(date);
     var expenseDescription = $('<td>').text(description);
     var expensePlace = $('<td>').text(place);
     var expenseAmount = $('<td>').text(amount);
     var removeRowBtn = $('<td>').addClass('deleteRowBtn').text('X');
 
-    expenseRow.append(expenseDate, expenseDescription, expensePlace, expenseAmount, removeRowBtn);
+    expenseRow.append(expenseCategory, expenseDate, expenseDescription, expensePlace, expenseAmount, removeRowBtn);
     $('#expenseTableBody').append(expenseRow);
 }
 
 function expenseSubmit(event) {
     event.preventDefault();
 
+    var expenseCategorySubmit = expenseCategoryInput.val();
     var expenseDateSubmit = expenseDateInput.val();
     var expenseDescriptionSubmit = expenseDescriptionInput.val();
     var expenseAmountSubmit = expenseAmountInput.val();
     var expensePlaceSubmit = expensePlaceInput.val();
     console.log("asigno variables");
 
-    AddExpense(expenseDateSubmit, expenseDescriptionSubmit, expensePlaceSubmit, expenseAmountSubmit);
+    AddExpense(expenseCategorySubmit, expenseDateSubmit, expenseDescriptionSubmit, expensePlaceSubmit, expenseAmountSubmit);
     expensesForm[0].reset();
     modalFrameBehaviour();
 }
