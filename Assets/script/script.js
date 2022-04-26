@@ -79,11 +79,11 @@ function modalFrameBehaviour() {
 //---------Add Expense from modal------------//
 function AddExpense(category, date, description, place, amount) {
     var expenseRow = $('<tr>');
-    var expenseCategory = $('<td>').text(category)
+    var expenseCategory = $('<td>').addClass('Categorytd').text(category)
     var expenseDate = $('<td>').text(date);
     var expenseDescription = $('<td>').text(description);
     var expensePlace = $('<td>').text(place);
-    var expenseAmount = $('<td>').text(amount);
+    var expenseAmount = $('<td>').addClass('amounttd').text(amount);
     var removeRowBtn = $('<td>').addClass('deleteRowBtn').text('X');
 
     expenseRow.append(expenseCategory, expenseDate, expenseDescription, expensePlace, expenseAmount, removeRowBtn);
@@ -109,6 +109,41 @@ function expenseSubmit(event) {
 function deleteExpense(event) {
     var deleteBtn = $(event.target);
     deleteBtn.parent('tr').remove();
+}
+
+//----------Sum Expenses------------//
+function sunExpenses() {
+    var amountGroc = 0;
+    var amountFood = 0;
+    var amountTransp = 0;
+    var amountUti = 0;
+    var amountOther = 0;
+    $('#expenseTableBody tr').each(function() {
+        var category = $(this).find('td:eq(0)').text();
+        switch(category) {
+            case "Groceries" :
+                amountGroc += parseInt($(this).find('td:eq(4)').text(), 10);
+                break;
+            case "Food" :
+                amountFood += parseInt($(this).find('td:eq(4)').text(), 10);
+                break;
+            case "Transportation" :
+                amountTransp += parseInt($(this).find('td:eq(4)').text(), 10);
+                break;
+            case "Utilities" :
+                amountUti += parseInt($(this).find('td:eq(4)').text(), 10);
+                break;
+            case "Other" :
+                amountOther += parseInt($(this).find('td:eq(4)').text(), 10);
+                break;
+        }
+    })
+    console.log(amountGroc);
+    console.log(amountFood);
+    console.log(amountTransp);
+    console.log(amountUti);
+    console.log(amountOther);
+    }
 }
 
 //-------------Buttons trigger---------------//
