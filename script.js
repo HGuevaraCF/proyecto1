@@ -2,76 +2,94 @@ var groceriesExpensed = document.getElementById('expensed-groceries');
 var restaurantsExpensed = document.getElementById('expensed-restaurants');
 var transportationExpensed = document.getElementById('expensed-transportation');
 var utilitiesExpensed = document.getElementById('expensed-utilities');
-var submitButton = document.querySelectorAll('button');
+var submitButton = document.querySelector('button');
 
+var getGroceries = parseFloat(localStorage.getItem('groceries'));
+var getRestaurants = parseFloat(localStorage.getItem('restaurants'));
+var getTransportation = parseFloat(localStorage.getItem('transportation'));
+var getUtilities = parseFloat(localStorage.getItem('utilities'));
+var accGroceries = isNaN(getGroceries) ? 0 : getGroceries;
+var accRestaurants = isNaN(getRestaurants) ? 0 : getRestaurants;
+var accTransportation = isNaN(getTransportation) ? 0 : getTransportation;
+var accUtilities = isNaN(getUtilities) ? 0 : getUtilities;
 
-var arrayKey = ['groceries', 'restaurants', 'transportation', 'utilities'];
-var arrayInputs = [groceriesExpensed, restaurantsExpensed, transportationExpensed, utilitiesExpensed];
-var arrayBtn = ['submit-groceries', 'submit-restaurants', 'submit-transportation', 'submit-utilities'];
-var arrayGroceries =[];
-var arrayRestaurants = [];
-var arrayTransportation = [];
-var arrayUtilities = [];
+function submitBtn (){
 
-var arrayTotal = [arrayGroceries, arrayRestaurants, arrayTransportation, arrayUtilities];
+    sumExpenses();
 
-
-
-function submitBtn (e){
-
-    for (let i = 0; i < arrayBtn.length; i++) {
-
-        if(arrayBtn[i] === e.target.id){
-
-            sumExpenses(arrayBtn[i]);
-
-        }
-            
-    }
-}
-
-function sumExpenses (expenses){
-
-    for (let i = 0; i < arrayBtn.length; i++) {
-        
-        if (expenses === arrayBtn[i]) {
-
-            arrayTotal[i].push(arrayInputs[i].value);
-
-            
-            localStorage.setItem(arrayKey[i], JSON.stringify(arrayTotal[i]));
-            sumGroceries = parseFloat(groceriesExpensed.value);
-            
-            // console.log(arrayInputs[i].value);
-            // console.log(arrayTotal[i]);
-            // console.log(sumGroceries);
-            sumSubtotals(expenses);
-
-        }
-
-        
-    }       
+    groceriesExpensed.value = '';
+    restaurantsExpensed.value = '';
+    transportationExpensed.value = '';
+    utilitiesExpensed.value = '';
 
 }
 
-function sumSubtotals(subtotalsCategories){
 
-    for (let i = 0; i < arrayKey.length; i++) {
+function sumExpenses (){
 
-        if (subtotalsCategories === arrayBtn[i]) {
-        var subtotals = parseFloat(JSON.parse(localStorage.getItem(arrayKey[i])));
-        
-        console.log(subtotals);
-    }
+var inputGroceries = isNaN(parseFloat(groceriesExpensed.value)) ? 0 : parseFloat(groceriesExpensed.value);
+
+accGroceries = accGroceries + inputGroceries;
+
+var subtotalGroceries = accGroceries;
+
+localStorage.setItem('groceries', subtotalGroceries.toFixed(2));
+
+
+
+var inputRestaurants = isNaN(parseFloat(restaurantsExpensed.value)) ? 0 : parseFloat(restaurantsExpensed.value);
+
+accRestaurants = accRestaurants + inputRestaurants;
+
+var subtotalRestaurants = accRestaurants;
+
+localStorage.setItem('restaurants', subtotalRestaurants.toFixed(2));
+
+
+var inputTransportation = isNaN(parseFloat(transportationExpensed.value)) ? 0 : parseFloat(transportationExpensed.value);
+
+accTransportation = accTransportation + inputTransportation;
+
+var subtotalTransportation = accTransportation;
+
+localStorage.setItem('transportation', subtotalTransportation.toFixed(2));
+
+
+var inputUtilities = isNaN(parseFloat(utilitiesExpensed.value)) ? 0 : parseFloat(utilitiesExpensed.value);
+
+accUtilities = accUtilities + inputUtilities;
+
+var subtotalUtilities = accUtilities;
+
+localStorage.setItem('utilities', subtotalUtilities.toFixed(2));
+
+var total = subtotalGroceries + subtotalRestaurants + subtotalTransportation + subtotalUtilities;
+
+localStorage.setItem('total', total.toFixed(2));
+
+printSubtotalsAndTotal();
+
 }
-    
+
+function printSubtotalsAndTotal (){
+
+var printGroceries = document.getElementById('subtotal-groceries');
+var printRestaurants = document.getElementById('subtotal-restaurants');
+var printTransportation = document.getElementById('subtotal-transportation');
+var printUtilities = document.getElementById('subtotal-utilities');
+var printTotal = document.getElementById('total');
+
+printGroceries.textContent = '$ ' + localStorage.getItem('groceries');
+printRestaurants.textContent = '$ ' + localStorage.getItem('restaurants');
+printTransportation.textContent = '$ ' + localStorage.getItem('transportation');
+printUtilities.textContent = '$ ' + localStorage.getItem('utilities');
+printTotal.textContent = '$ ' + localStorage.getItem('total');
+
+
 }
 
-for (let i = 0; i < 4; i++) {
+    submitButton.addEventListener('click', submitBtn);
 
-    submitButton[i].addEventListener('click', submitBtn);
-    
-}
 
 
 
