@@ -99,8 +99,8 @@
                <h1 class="cardHeader">Expenses</h1>
                <p>Click the button to add a new expense</p>
             </div>
-            <div class="ExpensesBody text-center">
-               <table class="expensesTable">
+            <div class="ExpensesBody text-center ">
+               <table class="expensesTable shadow-md sm:rounded-lg">
                   <thead class="dark:bg-blue-600 text-white">
                      <tr>
                         <th class="item">Expense Category</th>
@@ -120,12 +120,18 @@
                   Add Expense
                </button>
             </div>
+            <div class="totalAmounts" id="totalAmounts">
+               <div class="groceriesTotal">Total: <span class="groceriesDetail">0</span></div>
+               <div class="foodTotal">Total: <span class="foodDetail">0</span></div>
+               <div class="transportationTotal">Total: <span class="transportationDetail">0</span></div>
+               <div class="utilitiesTotal">Total: <span class="utilitiesDetail">0</span></div>
+               <div class="otherTotal">Total: <span class="otherDetail">0</span></div>
+            </div>
          </div>
       </div>
    </div>
 <!-----Modal------>
-   <div id="defaultModal"
-      class="modal overflow-y-auto overflow-x-hidden  w-full md:inset-0 h-modal md:h-full">
+   <div id="defaultModal" class="modal overflow-y-auto overflow-x-hidden  w-full md:inset-0 h-modal md:h-full">
       <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
          <!-- Modal content -->
          <div class="modalContent relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -159,29 +165,31 @@
                      <input type="text" id="expensePlace" placeholder="Market" required>
                   </div>
                   <div>
-                  <div>
-                     <label>Category</label>
-                     <!-- <input type="text" id="expensePlace" placeholder="Market" required> -->
-                     <select class="form-control" id="expenseCategory">
-                        <option selected disabled aria-placeholder="pick one">Pick one...</option>
-                        <option value="Groceries">Groceries</option>
-                        <option value="Restaurants">Restaurants</option>
-                        <option value="Transportation">Transportation</option>
-                        <option value="Utilies">Utilies</option>
-                      </select>
+                     <div>
+                        <label>Category</label>
+                        <!-- <input type="text" id="expensePlace" placeholder="Market" required> -->
+                        <select class="form-control" id="expenseCategory">
+                           <option selected disabled aria-placeholder="pick one">Pick one...</option>
+                           <option value="Groceries">Groceries</option>
+                           <option value="Restaurants">Food</option>
+                           <option value="Transportation">Transportation</option>
+                           <option value="Utilies">Utilties</option>
+                           <option value="Other">Other</option>
+                        </select>
+                     </div>
+                     <div>
+                        <label>Amount</label>
+                        <input type="number" id="expenseAmount" placeholder="$" min="0.0" required>
+                     </div>
                   </div>
-                  <div>
-                     <label>Amount</label>
-                     <input type="number" id="expenseAmount" placeholder="$" min="0.0" required>
+                  <!-- Modal footer -->
+                  <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                     <button type="button" id="closeModalBtnCancel"
+                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Close</button>
+                     <button type="submit" id="expenseSubmitBtn"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
+                        Expense</button>
                   </div>
-               </div>
-               <!-- Modal footer -->
-               <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                  <button type="button" id="closeModalBtnCancel"
-                     class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Close</button>
-                  <button type="submit" id="expenseSubmitBtn"
-                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
-                     Expense</button>
                </div>
             </form>
          </div>
