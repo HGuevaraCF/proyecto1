@@ -4,6 +4,7 @@
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <link rel="stylesheet" href="./Assets/styles/styles.css" />
    <link rel="stylesheet" href="./dist/output.css" />
    <title>Proyecto 1</title>
@@ -120,13 +121,36 @@
                   Add Expense
                </button>
             </div>
-            <div class="totalAmounts" id="totalAmounts">
-               <div class="groceriesTotal">Total: <span class="groceriesDetail">0</span></div>
-               <div class="foodTotal">Total: <span class="foodDetail">0</span></div>
-               <div class="transportationTotal">Total: <span class="transportationDetail">0</span></div>
-               <div class="utilitiesTotal">Total: <span class="utilitiesDetail">0</span></div>
-               <div class="otherTotal">Total: <span class="otherDetail">0</span></div>
-            </div>
+            <table class="totalAmounts" id="totalAmounts">
+               <tr>
+                  <th >Category</th>
+                  <th>Total</th>
+               </tr>
+               <tr>
+                  <th class="groceriesTotalTag">Groceries</th>
+                  <th id="groceriesDetail">0</th>
+               </tr>
+               <tr>
+                  <th class="foodTotalTag">Food</th>
+                  <th id="foodDetail">0</th>
+               </tr>
+               <tr>
+                  <th class="transportationTotalTag">Transport</th>
+                  <th id="transportationDetail">0</th>
+               </tr>
+               <tr>
+                  <th class="utilitiesTotalTag">Utilities</th>
+                  <th id="utilitiesDetail">0</th>
+               </tr>
+               <tr>
+                  <th class="otherTotalTag">Other</th>
+                  <th id="otherDetail">0</th>
+               </tr>
+               <tr>
+                  <th class="totalTag">Total</th>
+                  <th id="totalDetail">0</th>
+               </tr>
+            </table>
          </div>
       </div>
    </div>
@@ -168,12 +192,12 @@
                      <div>
                         <label>Category</label>
                         <!-- <input type="text" id="expensePlace" placeholder="Market" required> -->
-                        <select class="form-control" id="expenseCategory">
+                        <select class="form-control" id="expenseCategory" required>
                            <option selected disabled aria-placeholder="pick one">Pick one...</option>
                            <option value="Groceries">Groceries</option>
-                           <option value="Restaurants">Food</option>
+                           <option value="Food">Food</option>
                            <option value="Transportation">Transportation</option>
-                           <option value="Utilies">Utilties</option>
+                           <option value="Utilities">Utilities</option>
                            <option value="Other">Other</option>
                         </select>
                      </div>
@@ -198,11 +222,14 @@
 <!--------Financial Tips----------->
    <div class="financialScreen screen" id="financialScreen">
       <p>Financial tips</p>
+      <header>
+         <h1 id="title">Personal Finances</h1>
+     </header>
+     <div id="player" class="centervideo"></div>
    </div>
 <!--------Scan Ticket----------->
    <div class="scanScreen screen" id="scanScreen">
-      <p>Scan Ticket</p>
-      <img src="https://t3.ftcdn.net/jpg/03/44/17/18/360_F_344171869_h3nxznW93zBoOLuMeIJ3Q3xzanFSN8vu.jpg" alt="Site under construction" width="100px" height="100px">
+      <img src="./Assets/img/under_construction.png" alt="Site under construction" width="60%" height="auto">
    </div>
 <!--------Dashboard----------->
    <div class="dashboardScreen screen" id="dashboardScreen">

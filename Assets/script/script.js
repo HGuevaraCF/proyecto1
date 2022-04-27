@@ -20,6 +20,14 @@ var financialScreen = $('#financialScreen');
 var helpScreen = $('#helpScreen');
 var Screens = $('.screen');
 
+var groceriesTotalDisplay = $('#groceriesDetail');
+var foodTotalDisplay = $('#foodDetail');
+var transportTotalDisplay = $('#transportationDetail');
+var utilitiesTotalDisplay = $('#utilitiesDetail');
+var otherTotalDisplay = $('#otherDetail');
+var totalDisplay = $('#totalDetail');
+
+
 
 
 //-------------sidebar behaviour--------------//
@@ -36,7 +44,7 @@ function collapsibleSidebar() {
 
 }
 
-$('.sbBtn').on('click', function() {
+$('.sbBtn').on('click', function () {
     collapsibleSidebar();
     Screens.hide();
     var optionButton = $(this).attr('id');
@@ -98,7 +106,6 @@ function expenseSubmit(event) {
     var expenseDescriptionSubmit = expenseDescriptionInput.val();
     var expenseAmountSubmit = expenseAmountInput.val();
     var expensePlaceSubmit = expensePlaceInput.val();
-    console.log("asigno variables");
 
     AddExpense(expenseCategorySubmit, expenseDateSubmit, expenseDescriptionSubmit, expensePlaceSubmit, expenseAmountSubmit);
     expensesForm[0].reset();
@@ -112,50 +119,130 @@ function deleteExpense(event) {
 }
 
 //----------Sum Expenses------------//
-function sunExpenses() {
+function sumExpenses() {
     var amountGroc = 0;
     var amountFood = 0;
     var amountTransp = 0;
     var amountUti = 0;
     var amountOther = 0;
-    $('#expenseTableBody tr').each(function() {
+    $('#expenseTableBody tr').each(function () {
         var category = $(this).find('td:eq(0)').text();
-        switch(category) {
-            case "Groceries" :
+        switch (category) {
+            case "Groceries":
                 amountGroc += parseInt($(this).find('td:eq(4)').text(), 10);
                 break;
-            case "Food" :
+            case "Food":
                 amountFood += parseInt($(this).find('td:eq(4)').text(), 10);
                 break;
-            case "Transportation" :
+            case "Transportation":
                 amountTransp += parseInt($(this).find('td:eq(4)').text(), 10);
                 break;
-            case "Utilities" :
+            case "Utilities":
                 amountUti += parseInt($(this).find('td:eq(4)').text(), 10);
                 break;
-            case "Other" :
+            case "Other":
                 amountOther += parseInt($(this).find('td:eq(4)').text(), 10);
                 break;
         }
-    })
-    console.log(amountGroc);
-    console.log(amountFood);
-    console.log(amountTransp);
-    console.log(amountUti);
-    console.log(amountOther);
-    }
+    });
+
+    groceriesTotalDisplay.text(amountGroc);
+    foodTotalDisplay.text(amountFood);
+    transportTotalDisplay.text(amountTransp);
+    utilitiesTotalDisplay.text(amountUti);
+    otherTotalDisplay.text(amountOther);
+    totalDisplay.text(amountGroc + amountFood + amountTransp + amountUti + amountOther);
 }
+
+//-----------------Local Store expenses--------------//
+function storeExpenses(){
+    localStorage.clear();
+    var expensesStorage = [];
+    $('#expenseTableBody tr').each(function () {
+        expensesStorage.push({
+            Category: $(this).find('td:eq(0)').text(),
+            Date: $(this).find('td:eq(1)').text(),
+            Description: $(this).find('td:eq(2)').text(),
+            Place: $(this).find('td:eq(3)').text(),
+            Amount: $(this).find('td:eq(4)').text(),
+        });
+    });
+    localStorage.setItem("Expenses", JSON.stringify(expensesStorage));
+}
+
+
 
 //-------------Buttons trigger---------------//
 openModalBtn.on('click', modalFrameBehaviour);
 closeModalBtnX.on('click', modalFrameBehaviour);
 closeModalBtnCancel.on('click', modalFrameBehaviour);
 expensesForm.on('submit', expenseSubmit);
+expensesForm.on('submit', sumExpenses);
+expensesForm.on('submit', storeExpenses);
 expenseTableBody.on('click', '.deleteRowBtn', deleteExpense);
+expenseTableBody.on('click', '.deleteRowBtn', sumExpenses);
+expenseTableBody.on('click', '.deleteRowBtn', storeExpenses);
 
 
+//--------Actions triggered when page loads----------//
 $(document).ready(function () {
-    Screens.hide();
-    addExpenseScreen.show();
+    Screens.hide(); // Hide all screens
+    addExpenseScreen.show(); // Show home screen
+
+    //------Check for local storage and prints it if it exists----//
+    if(localStorage.getItem('Expenses') != null){
+        let expeneses = JSON.parse(localStorage.getItem("Expenses"));
+        expeneses.forEach(expense => {
+            AddExpense(expense.Category, expense.Date, expense.Description, expense.Place, expense.Amount);
+        });
+        sumExpenses(); 
+    }
+    
 })
 
+//-------------------Youtube API-------------------//
+let player = document.getElementById("player");
+
+const API_KEY = 'AIzaSyAef2luYscByCqPUlmPrktuCaFsHkVgL08';
+const playListId = 'PLaRCh1VgIzthPvpaXIsDwshR7tm4W-Y83';
+
+
+
+function getAPIData() {
+    fetch(`https://www.googleapis.com/youtube/v3/playlistItems?key=${API_KEY}&part=contentDetails, snippet&playlistId=${playListId}`)
+        .then(res => res.json()).then(data => {
+
+            showAPIdata(data);
+        });
+}
+
+
+getAPIData();
+function showAPIdata(data) {
+    // console.log(data);
+    var apiData = data.items.id;
+    // console.log(apiData);
+    var apiItemIndex = data.items;
+    // console.log(apiItemIndex);
+
+    for (i = 0; i <= apiItemIndex.length; i++) {
+        // console.log(i);
+        var vidID = data.items[i].contentDetails.videoId;
+        var vidTitle = data.items[i].snippet.title;
+        var vidOwner = data.items[i].snippet.videoOwnerChannelTitle;
+        // console.log(vidTitle);
+        var vidList = document.createElement('iframe');
+        vidList.setAttribute('allowFullScreen', '');
+        vidList.setAttribute('src', `https://www.youtube.com/embed/${vidID}`)
+        vidList.setAttribute('title', `${vidTitle}`)
+        vidList.setAttribute('width', '400');
+        vidList.setAttribute('height', '300');
+        vidList.setAttribute('id', 'video-player')
+        var vidTitleDom = document.createElement('p');
+        vidTitleDom.innerHTML = `Title:${vidTitle} <br>Video Owner: ${vidOwner}`;
+        // console.log(vidList);
+        player.appendChild(vidTitleDom);
+        player.appendChild(vidList);
+    }
+
+}

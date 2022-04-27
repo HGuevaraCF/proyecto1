@@ -50,3 +50,8 @@ h1 {
     right: 30%;
     bottom: 25%;
 }
+
+div.scanScreen img {
+    width: 60%;
+    margin-left: 20%!important;
+}
