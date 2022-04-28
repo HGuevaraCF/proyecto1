@@ -24,10 +24,10 @@ function rankingCoinpaprika (data){
         var nameCripto = data[i].name;
 		var priceUSD = data[i].quotes.USD.price;
 
-		var rankNumber = document.createElement('p');
-        var nameEl = document.createElement('p');
-		var priceEl = document.createElement('p');
-		var conversionEl = document.createElement('p');
+		var rankNumber = document.createElement('tr');
+        var nameEl = document.createElement('tr');
+		var priceEl = document.createElement('tr');
+		var conversionEl = document.createElement('tr');
         
 		ranking.appendChild(rankNumber);
         nameC.appendChild(nameEl);
