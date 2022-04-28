@@ -830,6 +830,11 @@ div.scanScreen img {
   margin: 6%, auto, 0%, 35%;
 }
 
+.dashboardScreen {
+  width: 50%;
+  margin-left: 25%;
+}
+
 .hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));

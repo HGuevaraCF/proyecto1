@@ -62,3 +62,8 @@ div.scanScreen img {
     margin-top: 6%;
     margin: 6%, auto, 0%, 35%;
 }
+
+.dashboardScreen {
+    width: 50%;
+    margin-left: 25%;
+}

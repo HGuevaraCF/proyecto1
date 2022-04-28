@@ -170,36 +170,6 @@ function storeExpenses(){
     localStorage.setItem("Expenses", JSON.stringify(expensesStorage));
 }
 
-
-
-//-------------Buttons trigger---------------//
-openModalBtn.on('click', modalFrameBehaviour);
-closeModalBtnX.on('click', modalFrameBehaviour);
-closeModalBtnCancel.on('click', modalFrameBehaviour);
-expensesForm.on('submit', expenseSubmit);
-expensesForm.on('submit', sumExpenses);
-expensesForm.on('submit', storeExpenses);
-expenseTableBody.on('click', '.deleteRowBtn', deleteExpense);
-expenseTableBody.on('click', '.deleteRowBtn', sumExpenses);
-expenseTableBody.on('click', '.deleteRowBtn', storeExpenses);
-
-
-//--------Actions triggered when page loads----------//
-$(document).ready(function () {
-    Screens.hide(); // Hide all screens
-    addExpenseScreen.show(); // Show home screen
-
-    //------Check for local storage and prints it if it exists----//
-    if(localStorage.getItem('Expenses') != null){
-        let expeneses = JSON.parse(localStorage.getItem("Expenses"));
-        expeneses.forEach(expense => {
-            AddExpense(expense.Category, expense.Date, expense.Description, expense.Place, expense.Amount);
-        });
-        sumExpenses(); 
-    }
-    
-})
-
 //-------------------Youtube API-------------------//
 let player = document.getElementById("player");
 
@@ -246,3 +216,123 @@ function showAPIdata(data) {
     }
 
 }
+
+//-------------------Dashboard behauviour-------------------//
+function createGraph() {
+const BChart = document.getElementById("BarChart").getContext("2d");
+const groceriesTotal = parseInt(groceriesTotalDisplay.text());
+const foodTotal = parseInt(foodTotalDisplay.text());
+const transportTotal = parseInt(transportTotalDisplay.text());
+const utilitiesTotal = parseInt(utilitiesTotalDisplay.text());
+const otherTotal = parseInt(otherTotalDisplay.text());
+console.log(foodTotal);
+const expensesData = [groceriesTotal, foodTotal, transportTotal, utilitiesTotal, otherTotal];
+const myChart = new Chart(BChart, {
+    type: "bar",
+    responsive: true,
+    data: {
+        labels: ["groceries", "food", "transport", "utilities", "other" ],
+        datasets: [{
+            label: "Expenses",
+            data: expensesData,
+            backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)"
+            ],
+            borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)"
+            ],
+            borderWidth: 1
+        },{
+            type: 'line',
+            label: 'Income',
+            data: [50, 50, 50, 50],
+        }
+    ]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+const DChart = document.getElementById("DoughnutChart").getContext("2d");
+const scndChart = new Chart(DChart, {
+    type: "doughnut",
+    responsive: true,
+    data: {
+        labels: ["groceries", "food", "transport", "utilities", "other" ],
+        datasets: [{
+            label: "Expenses",
+            data: expensesData,
+            backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)"
+            ],
+            borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)"
+            ],
+            borderWidth: 1
+        }]
+    },
+    // options: {
+    //     scales: {
+    //         y: {
+    //             beginAtZero: true
+    //         }
+    //     }
+    // }
+});
+
+}
+
+//-------------Buttons trigger---------------//
+openModalBtn.on('click', modalFrameBehaviour);
+closeModalBtnX.on('click', modalFrameBehaviour);
+closeModalBtnCancel.on('click', modalFrameBehaviour);
+expensesForm.on('submit', expenseSubmit);
+expensesForm.on('submit', sumExpenses);
+expensesForm.on('submit', storeExpenses);
+expensesForm.on('submit', createGraph);
+expenseTableBody.on('click', '.deleteRowBtn', deleteExpense);
+expenseTableBody.on('click', '.deleteRowBtn', sumExpenses);
+expenseTableBody.on('click', '.deleteRowBtn', storeExpenses);
+expenseTableBody.on('click', '.deleteRowBtn', createGraph);
+
+
+//--------Actions triggered when page loads----------//
+$(document).ready(function () {
+    Screens.hide(); // Hide all screens
+    addExpenseScreen.show(); // Show home screen
+
+    //------Check for local storage and prints it if it exists----//
+    if(localStorage.getItem('Expenses') != null){
+        let expeneses = JSON.parse(localStorage.getItem("Expenses"));
+        expeneses.forEach(expense => {
+            AddExpense(expense.Category, expense.Date, expense.Description, expense.Place, expense.Amount);
+        });
+        sumExpenses(); 
+    }
+    createGraph();
+})
