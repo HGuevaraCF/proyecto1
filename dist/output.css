@@ -540,6 +540,19 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-width: 42rem;
 }
 
+<<<<<<< HEAD
+.border-collapse {
+  border-collapse: collapse;
+}
+
+.items-start {
+  align-items: flex-start;
+=======
+.flex-1 {
+  flex: 1 1 0%;
+>>>>>>> FinanzasPersonales
+}
+
 .border-collapse {
   border-collapse: collapse;
 }
@@ -580,6 +593,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .overflow-x-hidden {
   overflow-x: hidden;
+}
+
+<<<<<<< HEAD
+.rounded-lg {
+  border-radius: 0.5rem;
+=======
+.whitespace-nowrap {
+  white-space: nowrap;
+>>>>>>> FinanzasPersonales
 }
 
 .rounded-lg {
@@ -1020,5 +1042,9 @@ div.scanScreen img {
     font-size: 1.5rem;
     line-height: 2rem;
   }
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> FinanzasPersonales
