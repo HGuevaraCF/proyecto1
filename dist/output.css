@@ -818,6 +818,18 @@ h1 {
   bottom: 25%;
 }
 
+div.scanScreen img {
+  width: 60%;
+  margin-left: 20%!important;
+}
+
+.totalAmounts {
+  width: 30%;
+  margin-left: 35%;
+  margin-top: 6%;
+  margin: 6%, auto, 0%, 35%;
+}
+
 .hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
