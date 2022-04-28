@@ -61,7 +61,7 @@
                </a>
             </li>
             <li>
-               <a href="#" id="sbHelpBtn"
+               <a href="#" id="sbCurrencyBtn"
                   class=" sbBtn flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -233,8 +233,22 @@
    <p>Calendar View</p>
 </div>
 <!--------Currency Conversion----------->
-<div class="currencyScreen screen" id="currencyScreen">
-   <p>Help</p>
+<div class="currencyScreen screen screenMargin" id="currencyScreen">
+   <p>Currency conversion</p>
+   <table class="shadow-md sm:rounded-lg" id="cripto">
+      <td id="ranking">
+          <h4 class="rankHeader dark:bg-blue-600 text-white">Rank</h4>
+      </td>
+      <td id="name">
+          <h4 class="nameHeader dark:bg-blue-600 text-white">Name</h4>
+      </td>
+      <td id="priceCriptos">
+          <h4 class="usdHeader dark:bg-blue-600 text-white">USD price</h4>
+      </td>
+      <td id="conversion">
+          <h4 class="conversionHeader dark:bg-blue-600 text-white">Conversion</h4>
+      </td>
+  </table>
 </div>
 <!--------Financial Tips----------->
    <div class="financialScreen screen screenMargin" id="financialScreen">

@@ -94,3 +94,7 @@ div.scanScreen img {
     padding-top: 2%;
 }
 
+#id:nth-child(odd), #name:nth-child(odd), #priceCriptos:nth-child(odd), #conversion:nth-child(odd) {
+    background-color: red;
+}
+
