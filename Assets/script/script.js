@@ -201,6 +201,8 @@ function showAPIdata(data) {
         var vidTitle = data.items[i].snippet.title;
         var vidOwner = data.items[i].snippet.videoOwnerChannelTitle;
         // console.log(vidTitle);
+        var viddiv = document.createElement('div');
+        viddiv.setAttribute('class', 'video-frame block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-400 dark:border-gray-700 dark:hover:bg-gray-700');
         var vidList = document.createElement('iframe');
         vidList.setAttribute('allowFullScreen', '');
         vidList.setAttribute('src', `https://www.youtube.com/embed/${vidID}`)
@@ -208,11 +210,13 @@ function showAPIdata(data) {
         vidList.setAttribute('width', '400');
         vidList.setAttribute('height', '300');
         vidList.setAttribute('id', 'video-player')
-        var vidTitleDom = document.createElement('p');
+        var vidTitleDom = document.createElement('h2');
         vidTitleDom.innerHTML = `Title:${vidTitle} <br>Video Owner: ${vidOwner}`;
         // console.log(vidList);
-        player.appendChild(vidTitleDom);
-        player.appendChild(vidList);
+        
+        viddiv.appendChild(vidTitleDom);
+        viddiv.appendChild(vidList);
+        player.appendChild(viddiv);
     }
 
 }

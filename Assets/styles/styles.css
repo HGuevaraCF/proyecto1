@@ -17,6 +17,7 @@ h1 {
 .sidebarBtn {
     transition: margin-left .5s;
     padding: 16px;
+    position: fixed;
   }
 
 .modal{
@@ -67,3 +68,29 @@ div.scanScreen img {
     width: 50%;
     margin-left: 25%;
 }
+
+#BarChart {
+    margin-bottom: 10%;
+}
+
+#DoughnutChart {
+    width: 70%!important;
+    height: 70%!important;
+}
+
+
+#video-player {
+    width: 100%;
+    flex: 0, 0, 33.33%;
+}
+
+.video-frame {
+    margin: 10px;
+}
+
+.screenMargin {
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-top: 2%;
+}
+
