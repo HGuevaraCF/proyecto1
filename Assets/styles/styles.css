@@ -98,3 +98,6 @@ div.scanScreen img {
     background-color: red;
 }
 
+.CalendarContainer{
+    margin-left: 125px ;
+    transform: scale(0.75);}
