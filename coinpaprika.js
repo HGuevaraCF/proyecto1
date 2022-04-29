@@ -24,15 +24,18 @@ function rankingCoinpaprika (data){
         var nameCripto = data[i].name;
 		var priceUSD = data[i].quotes.USD.price;
 
-		var rankNumber = document.createElement('p');
-        var nameEl = document.createElement('p');
-		var priceEl = document.createElement('p');
-		var conversionEl = document.createElement('p');
+		var trEL = document.createElement('tr');
+		var rankNumber = document.createElement('td');
+        var nameEl = document.createElement('td');
+		var priceEl = document.createElement('td');
+		var conversionEl = document.createElement('td');
         
-		ranking.appendChild(rankNumber);
-        nameC.appendChild(nameEl);
-		priceCriptos.appendChild(priceEl);
-		conversion.appendChild(conversionEl);
+		cripto.appendChild(trEL);
+		trEL.appendChild(rankNumber);
+		trEL.appendChild(nameEl);
+		trEL.appendChild(priceEl);
+		trEL.appendChild(conversionEl);
+		
 
 		rankNumber.innerHTML = '#' + rank;
         nameEl.innerHTML = nameCripto;
