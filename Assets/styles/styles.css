@@ -64,10 +64,6 @@ div.scanScreen img {
     margin: 6%, auto, 0%, 35%;
 }
 
-.dashboardScreen {
-    width: 50%;
-    margin-left: 25%;
-}
 
 #BarChart {
     margin-bottom: 10%;
@@ -98,6 +94,50 @@ div.scanScreen img {
     background-color: red;
 }
 
+
+.totalAmountsTable tr td {
+    padding: 0% 5%;
+    text-align: justify;
+}
+.totalAmountsTable tr th {
+    padding: 0% 5%;
+    text-align: justify;
+}
+
+.totalAmountsTable {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 3%;
+}
+
+.chart  {
+    width: 50%;
+
+}
+
+.charts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.doughnutChart {
+    display: flex;
+    justify-content: center;
+}
+
 .CalendarContainer{
     margin-left: 125px ;
     transform: scale(0.75);}
+
+
+@media only screen and (max-width: 900px){
+    .charts {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+}
+

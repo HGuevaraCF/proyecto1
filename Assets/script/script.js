@@ -208,7 +208,7 @@ function showAPIdata(data) {
         var vidOwner = data.items[i].snippet.videoOwnerChannelTitle;
         // console.log(vidTitle);
         var viddiv = document.createElement('div');
-        viddiv.setAttribute('class', 'video-frame block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-400 dark:border-gray-700 dark:hover:bg-gray-700');
+        viddiv.setAttribute('class', 'video-frame block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-400 dark:border-gray-700 dark:hover:bg-gray-700 text-white');
         var vidList = document.createElement('iframe');
         vidList.setAttribute('allowFullScreen', '');
         vidList.setAttribute('src', `https://www.youtube.com/embed/${vidID}`)
@@ -228,6 +228,8 @@ function showAPIdata(data) {
 }
 
 //-------------------Currency API-------------------//
+// $('table#totalAmounts tr').remove();
+
 var cripto = document.getElementById('cripto');
 var ranking = document.getElementById('ranking');
 var nameC = document.getElementById('name');
@@ -244,30 +246,36 @@ fetch(`https://api.coinpaprika.com/v1/tickers`)
 }
 
 function rankingCoinpaprika (data){
+    $('#cripto tr').not(':first').each(function () {
+        $(this).remove()
+    });
 
 	console.log(data);
 
-	var total = 10_000;
+	var total = totalDisplay.text();
 
-	for (i = 0; i <= 9; i++) {
+	for (i = 1; i <= 9; i++) {
         var rank = data[i].rank;
         var nameCripto = data[i].name;
 		var priceUSD = data[i].quotes.USD.price;
 
-		var rankNumber = document.createElement('p');
-        var nameEl = document.createElement('p');
-		var priceEl = document.createElement('p');
-		var conversionEl = document.createElement('p');
+		var trEL = document.createElement('tr');
+		var rankNumber = document.createElement('td');
+        var nameEl = document.createElement('td');
+		var priceEl = document.createElement('td');
+		var conversionEl = document.createElement('td');
         
-		ranking.appendChild(rankNumber);
-        nameC.appendChild(nameEl);
-		priceCriptos.appendChild(priceEl);
-		conversion.appendChild(conversionEl);
+		cripto.appendChild(trEL);
+		trEL.appendChild(rankNumber);
+		trEL.appendChild(nameEl);
+		trEL.appendChild(priceEl);
+		trEL.appendChild(conversionEl);
+		
 
 		rankNumber.innerHTML = '#' + rank;
         nameEl.innerHTML = nameCripto;
-		priceEl.innerHTML = '$ ' + priceUSD.toFixed(4);
-		conversionEl.innerHTML = (total/priceUSD).toFixed(4);
+		priceEl.innerHTML = '$ ' + priceUSD.toString().substr(0,7);
+		conversionEl.innerHTML = (total/priceUSD).toString().substr(0,7);
 
     }
 	
@@ -310,10 +318,6 @@ const myChart = new Chart(BChart, {
             "rgba(255, 159, 64, 1)"
             ],
             borderWidth: 1
-        },{
-            type: 'line',
-            label: 'Income',
-            data: [50, 50, 50, 50],
         }
     ]
     },
@@ -373,10 +377,12 @@ expensesForm.on('submit', expenseSubmit);
 expensesForm.on('submit', sumExpenses);
 expensesForm.on('submit', storeExpenses);
 expensesForm.on('submit', createGraph);
+expensesForm.on('submit', getApiData);
 expenseTableBody.on('click', '.deleteRowBtn', deleteExpense);
 expenseTableBody.on('click', '.deleteRowBtn', sumExpenses);
 expenseTableBody.on('click', '.deleteRowBtn', storeExpenses);
 expenseTableBody.on('click', '.deleteRowBtn', createGraph);
+expenseTableBody.on('click', '.deleteRowBtn', getApiData);
 
 
 //--------Actions triggered when page loads----------//
@@ -393,6 +399,7 @@ $(document).ready(function () {
         sumExpenses(); 
     }
     createGraph();
+    getApiData();
 })
 
 
@@ -475,3 +482,5 @@ function transformDate(date){
 
     return month +"/"+ day+"/"+year;
 }
+
+
