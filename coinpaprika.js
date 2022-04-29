@@ -1,8 +1,5 @@
 var cripto = document.getElementById('cripto');
-var ranking = document.getElementById('ranking');
-var nameC = document.getElementById('name');
-var priceCriptos = document.getElementById('priceCriptos');
-var conversion = document.getElementById('conversion');
+
 
 function getApiData (){
 fetch(`https://api.coinpaprika.com/v1/tickers`)
