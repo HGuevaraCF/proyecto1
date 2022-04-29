@@ -94,6 +94,7 @@ div.scanScreen img {
     background-color: red;
 }
 
+
 .totalAmountsTable tr td {
     padding: 0% 5%;
     text-align: justify;
@@ -126,6 +127,10 @@ div.scanScreen img {
     justify-content: center;
 }
 
+.CalendarContainer{
+    margin-left: 125px ;
+    transform: scale(0.75);}
+
 
 @media only screen and (max-width: 900px){
     .charts {
@@ -135,3 +140,4 @@ div.scanScreen img {
         align-items: center;
     }
 }
+

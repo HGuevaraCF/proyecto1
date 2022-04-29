@@ -85,8 +85,8 @@ function modalFrameBehaviour() {
 
 
 //---------Add Expense from modal------------//
-function AddExpense(category, date, description, place, amount) {
-    var expenseRow = $('<tr>');
+function AddExpense(category, date, description, place, amount,calendarID) {
+    var expenseRow = $('<tr>').attr("idCurrentCounter",calendarID);
     var expenseCategory = $('<td>').addClass('Categorytd').text(category)
     var expenseDate = $('<td>').text(date);
     var expenseDescription = $('<td>').text(description);
@@ -107,7 +107,11 @@ function expenseSubmit(event) {
     var expenseAmountSubmit = expenseAmountInput.val();
     var expensePlaceSubmit = expensePlaceInput.val();
 
-    AddExpense(expenseCategorySubmit, expenseDateSubmit, expenseDescriptionSubmit, expensePlaceSubmit, expenseAmountSubmit);
+    AddExpense(expenseCategorySubmit, expenseDateSubmit, expenseDescriptionSubmit, expensePlaceSubmit, expenseAmountSubmit,idCounter);
+    createCalEvent(idCounter,expenseCategorySubmit,transformDate(expenseDateSubmit),expenseDescriptionSubmit,expenseAmountSubmit);
+    idCounter++;
+    localStorage.setItem("idStoredCounter",idCounter)
+    localStorage.setItem('StoredCalendarExpenses',JSON.stringify(storedEvents));
     expensesForm[0].reset();
     modalFrameBehaviour();
 }
@@ -115,6 +119,7 @@ function expenseSubmit(event) {
 //---------Delete Expense------------//
 function deleteExpense(event) {
     var deleteBtn = $(event.target);
+    deleteCalEvent(deleteBtn.parent('tr').attr("idCurrentCounter"))
     deleteBtn.parent('tr').remove();
 }
 
@@ -156,7 +161,7 @@ function sumExpenses() {
 
 //-----------------Local Store expenses--------------//
 function storeExpenses(){
-    localStorage.clear();
+    localStorage.removeItem("Expenses");
     var expensesStorage = [];
     $('#expenseTableBody tr').each(function () {
         expensesStorage.push({
@@ -165,6 +170,7 @@ function storeExpenses(){
             Description: $(this).find('td:eq(2)').text(),
             Place: $(this).find('td:eq(3)').text(),
             Amount: $(this).find('td:eq(4)').text(),
+            CalendarID: $(this).attr("idCurrentCounter"),
         });
     });
     localStorage.setItem("Expenses", JSON.stringify(expensesStorage));
@@ -388,10 +394,93 @@ $(document).ready(function () {
     if(localStorage.getItem('Expenses') != null){
         let expeneses = JSON.parse(localStorage.getItem("Expenses"));
         expeneses.forEach(expense => {
-            AddExpense(expense.Category, expense.Date, expense.Description, expense.Place, expense.Amount);
+            AddExpense(expense.Category, expense.Date, expense.Description, expense.Place, expense.Amount,expense.CalendarID);
         });
         sumExpenses(); 
     }
     createGraph();
     getApiData();
 })
+
+
+// Calendar
+if(localStorage.getItem("StoredCalendarExpenses") == null){
+    var storedEvents = []
+}else{
+    var storedEvents = JSON.parse(localStorage.getItem("StoredCalendarExpenses"))
+}
+
+if(localStorage.getItem("idStoredCounter") == null){
+    var idCounter = 1000;
+}else{
+    var idCounter = JSON.parse(localStorage.getItem("idStoredCounter")); 
+}
+
+$(document).ready(function() {
+    $('#calendar').evoCalendar({
+        theme: "Royal Navy",
+        firstDayOfWeek: 1,
+        language: "en",
+        todayHighlight: true,
+        calendarEvents: storedEvents
+    })
+})
+
+function createCalEvent(event_id,event_name,event_date,event_description, event_amount) {
+    $("#calendar").evoCalendar('addCalendarEvent', [{
+        id: event_id,
+        name: event_name,// Event badge (optional)
+        date: event_date, // Date range
+        description: event_description + " - Expense Total: " + event_amount, // Event description (optional)
+        type: "event",
+        color: "darkgreen" // Event custom color (optional)
+        }
+    ]);
+}
+
+function deleteCalEvent(idGiven) {
+    $("#calendar").evoCalendar('removeCalendarEvent',parseInt(idGiven))
+    for (i = 0; i < storedEvents.length; i++) {
+        if (storedEvents[0].id == idGiven) {
+            storedEvents.splice(i,1)
+        }
+    }
+    localStorage.setItem('StoredCalendarExpenses',JSON.stringify(storedEvents));
+}
+
+function transformDate(date){
+    var newDate = date.split("-")
+    day = newDate[2]
+    month = newDate[1]
+    year = newDate[0]
+
+    if (month == "01") {
+        month = "January";
+    }else if (month == "02"){
+        month = "February";
+    }else if (month == "03"){
+        month = "March";
+    }else if (month == "04"){
+        month = "April";
+    }else if (month == "05"){
+        month = "May";
+    }else if (month == "06"){
+        month = "June";
+    }else if (month == "07"){
+        month = "July";
+    }else if (month == "08"){
+        month = "August";
+    }else if (month == "09"){
+        month = "September";
+    }else if (month == "10"){
+        month = "October";
+    }else if (month == "11"){
+        month = "November";
+    }else if (month == "12"){
+        month = "December";
+    }
+
+    return month +"/"+ day+"/"+year;
+}
+
+
