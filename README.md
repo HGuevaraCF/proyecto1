@@ -3,3 +3,5 @@
 - This app is designed to provide the user a tool to improve its personal finances.
 
 Link to application: https://hguevaracf.github.io/proyecto1/
+
+![link](Assets/img/ProyectSS.png)
