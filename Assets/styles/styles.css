@@ -47,6 +47,7 @@ h1 {
 
 .modalContent{
     position: fixed!important;
+    background-color: #0c4a6e!important;
     width: 40%;
     right: 30%;
     bottom: 25%;
@@ -129,7 +130,8 @@ div.scanScreen img {
 
 .CalendarContainer{
     margin-left: 125px ;
-    transform: scale(0.75);}
+    transform: scale(0.75);
+}
 
 
 @media only screen and (max-width: 900px){

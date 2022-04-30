@@ -402,12 +402,13 @@ $(document).ready(function () {
 })
 
 
-// Calendar
+//--------------------Calendar View-------------------//
 if(localStorage.getItem("StoredCalendarExpenses") == null){
     var storedEvents = []
 }else{
     var storedEvents = JSON.parse(localStorage.getItem("StoredCalendarExpenses"))
 }
+console.log(storedEvents);
 
 if(localStorage.getItem("idStoredCounter") == null){
     var idCounter = 1000;
