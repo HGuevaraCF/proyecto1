@@ -65,7 +65,7 @@ We hope this add help you:
 - CSS
 - Tailwind
 - Youtube API
-- Fixer API
+- Fixer API - Future development.
 - Coinpaprika API
 
 ## Collaborators:
