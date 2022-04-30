@@ -91,7 +91,7 @@ function AddExpense(category, date, description, place, amount,calendarID) {
     var expenseDate = $('<td>').text(date);
     var expenseDescription = $('<td>').text(description);
     var expensePlace = $('<td>').text(place);
-    var expenseAmount = $('<td>').addClass('amounttd').text(amount);
+    var expenseAmount = $('<td>').addClass('amounttd').text("$" + amount);
     var removeRowBtn = $('<td>').addClass('deleteRowBtn').text('X');
 
     expenseRow.append(expenseCategory, expenseDate, expenseDescription, expensePlace, expenseAmount, removeRowBtn);
