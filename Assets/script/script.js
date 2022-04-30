@@ -228,15 +228,14 @@ function showAPIdata(data) {
 }
 
 //-------------------Currency API-------------------//
-// $('table#totalAmounts tr').remove();
-
 var cripto = document.getElementById('cripto');
 var ranking = document.getElementById('ranking');
 var nameC = document.getElementById('name');
 var priceCriptos = document.getElementById('priceCriptos');
 var conversion = document.getElementById('conversion');
 
-function getApiData (){
+function getCurrencyApiData (){
+$('#cripto tr').not(':first').remove();
 fetch(`https://api.coinpaprika.com/v1/tickers`)
 	.then(response => response.json())
 	.then(data => rankingCoinpaprika(data))
@@ -254,7 +253,7 @@ function rankingCoinpaprika (data){
 
 	var total = totalDisplay.text();
 
-	for (i = 1; i <= 9; i++) {
+	for (i = 0; i <= 9; i++) {
         var rank = data[i].rank;
         var nameCripto = data[i].name;
 		var priceUSD = data[i].quotes.USD.price;
@@ -281,7 +280,7 @@ function rankingCoinpaprika (data){
 	
 }
 
-getApiData();
+getCurrencyApiData();
 
 //-------------------Dashboard behauviour-------------------//
 function createGraph() {
@@ -376,13 +375,13 @@ closeModalBtnCancel.on('click', modalFrameBehaviour);
 expensesForm.on('submit', expenseSubmit);
 expensesForm.on('submit', sumExpenses);
 expensesForm.on('submit', storeExpenses);
-expensesForm.on('submit', createGraph);
-expensesForm.on('submit', getApiData);
+// expensesForm.on('submit', createGraph);
+expensesForm.on('submit', getCurrencyApiData);
 expenseTableBody.on('click', '.deleteRowBtn', deleteExpense);
 expenseTableBody.on('click', '.deleteRowBtn', sumExpenses);
 expenseTableBody.on('click', '.deleteRowBtn', storeExpenses);
-expenseTableBody.on('click', '.deleteRowBtn', createGraph);
-expenseTableBody.on('click', '.deleteRowBtn', getApiData);
+// expenseTableBody.on('click', '.deleteRowBtn', createGraph);
+expenseTableBody.on('click', '.deleteRowBtn', getCurrencyApiData);
 
 
 //--------Actions triggered when page loads----------//
@@ -399,7 +398,7 @@ $(document).ready(function () {
         sumExpenses(); 
     }
     createGraph();
-    getApiData();
+    getCurrencyApiData();
 })
 
 
