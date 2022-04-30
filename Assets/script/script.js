@@ -289,6 +289,9 @@ function createGraph() {
     if(myChart){
         myChart.destroy();
     }
+    if(scndChart){
+        scndChart.destroy();
+    }
 const BChart = document.getElementById("BarChart").getContext("2d");
 const groceriesTotal = parseInt(groceriesTotalDisplay.text());
 const foodTotal = parseInt(foodTotalDisplay.text());
