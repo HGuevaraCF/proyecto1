@@ -85,8 +85,8 @@ function modalFrameBehaviour() {
 
 
 //---------Add Expense from modal------------//
-function AddExpense(category, date, description, place, amount) {
-    var expenseRow = $('<tr>');
+function AddExpense(category, date, description, place, amount,calendarID) {
+    var expenseRow = $('<tr>').attr("idCurrentCounter",calendarID);
     var expenseCategory = $('<td>').addClass('Categorytd').text(category)
     var expenseDate = $('<td>').text(date);
     var expenseDescription = $('<td>').text(description);
@@ -107,7 +107,11 @@ function expenseSubmit(event) {
     var expenseAmountSubmit = expenseAmountInput.val();
     var expensePlaceSubmit = expensePlaceInput.val();
 
-    AddExpense(expenseCategorySubmit, expenseDateSubmit, expenseDescriptionSubmit, expensePlaceSubmit, expenseAmountSubmit);
+    AddExpense(expenseCategorySubmit, expenseDateSubmit, expenseDescriptionSubmit, expensePlaceSubmit, expenseAmountSubmit,idCounter);
+    createCalEvent(idCounter,expenseCategorySubmit,transformDate(expenseDateSubmit),expenseDescriptionSubmit,expenseAmountSubmit);
+    idCounter++;
+    localStorage.setItem("idStoredCounter",idCounter)
+    localStorage.setItem('StoredCalendarExpenses',JSON.stringify(storedEvents));
     expensesForm[0].reset();
     modalFrameBehaviour();
 }
@@ -115,6 +119,7 @@ function expenseSubmit(event) {
 //---------Delete Expense------------//
 function deleteExpense(event) {
     var deleteBtn = $(event.target);
+    deleteCalEvent(deleteBtn.parent('tr').attr("idCurrentCounter"))
     deleteBtn.parent('tr').remove();
 }
 
@@ -156,7 +161,7 @@ function sumExpenses() {
 
 //-----------------Local Store expenses--------------//
 function storeExpenses(){
-    localStorage.clear();
+    localStorage.removeItem("Expenses");
     var expensesStorage = [];
     $('#expenseTableBody tr').each(function () {
         expensesStorage.push({
@@ -165,6 +170,7 @@ function storeExpenses(){
             Description: $(this).find('td:eq(2)').text(),
             Place: $(this).find('td:eq(3)').text(),
             Amount: $(this).find('td:eq(4)').text(),
+            CalendarID: $(this).attr("idCurrentCounter"),
         });
     });
     localStorage.setItem("Expenses", JSON.stringify(expensesStorage));
@@ -222,15 +228,14 @@ function showAPIdata(data) {
 }
 
 //-------------------Currency API-------------------//
-// $('table#totalAmounts tr').remove();
-
 var cripto = document.getElementById('cripto');
 var ranking = document.getElementById('ranking');
 var nameC = document.getElementById('name');
 var priceCriptos = document.getElementById('priceCriptos');
 var conversion = document.getElementById('conversion');
 
-function getApiData (){
+function getCurrencyApiData (){
+$('#cripto tr').not(':first').remove();
 fetch(`https://api.coinpaprika.com/v1/tickers`)
 	.then(response => response.json())
 	.then(data => rankingCoinpaprika(data))
@@ -248,7 +253,7 @@ function rankingCoinpaprika (data){
 
 	var total = totalDisplay.text();
 
-	for (i = 1; i <= 9; i++) {
+	for (i = 0; i <= 9; i++) {
         var rank = data[i].rank;
         var nameCripto = data[i].name;
 		var priceUSD = data[i].quotes.USD.price;
@@ -275,10 +280,18 @@ function rankingCoinpaprika (data){
 	
 }
 
-getApiData();
+getCurrencyApiData();
 
 //-------------------Dashboard behauviour-------------------//
+let myChart;
+let scndChart;
 function createGraph() {
+    if(myChart){
+        myChart.destroy();
+    }
+    if(scndChart){
+        scndChart.destroy();
+    }
 const BChart = document.getElementById("BarChart").getContext("2d");
 const groceriesTotal = parseInt(groceriesTotalDisplay.text());
 const foodTotal = parseInt(foodTotalDisplay.text());
@@ -287,7 +300,7 @@ const utilitiesTotal = parseInt(utilitiesTotalDisplay.text());
 const otherTotal = parseInt(otherTotalDisplay.text());
 console.log(foodTotal);
 const expensesData = [groceriesTotal, foodTotal, transportTotal, utilitiesTotal, otherTotal];
-const myChart = new Chart(BChart, {
+ myChart = new Chart(BChart, {
     type: "bar",
     responsive: true,
     data: {
@@ -325,7 +338,7 @@ const myChart = new Chart(BChart, {
 });
 
 const DChart = document.getElementById("DoughnutChart").getContext("2d");
-const scndChart = new Chart(DChart, {
+ scndChart = new Chart(DChart, {
     type: "doughnut",
     responsive: true,
     data: {
@@ -363,6 +376,7 @@ const scndChart = new Chart(DChart, {
 
 }
 
+
 //-------------Buttons trigger---------------//
 openModalBtn.on('click', modalFrameBehaviour);
 closeModalBtnX.on('click', modalFrameBehaviour);
@@ -371,12 +385,12 @@ expensesForm.on('submit', expenseSubmit);
 expensesForm.on('submit', sumExpenses);
 expensesForm.on('submit', storeExpenses);
 expensesForm.on('submit', createGraph);
-expensesForm.on('submit', getApiData);
+expensesForm.on('submit', getCurrencyApiData);
 expenseTableBody.on('click', '.deleteRowBtn', deleteExpense);
 expenseTableBody.on('click', '.deleteRowBtn', sumExpenses);
 expenseTableBody.on('click', '.deleteRowBtn', storeExpenses);
 expenseTableBody.on('click', '.deleteRowBtn', createGraph);
-expenseTableBody.on('click', '.deleteRowBtn', getApiData);
+expenseTableBody.on('click', '.deleteRowBtn', getCurrencyApiData);
 
 
 //--------Actions triggered when page loads----------//
@@ -388,10 +402,94 @@ $(document).ready(function () {
     if(localStorage.getItem('Expenses') != null){
         let expeneses = JSON.parse(localStorage.getItem("Expenses"));
         expeneses.forEach(expense => {
-            AddExpense(expense.Category, expense.Date, expense.Description, expense.Place, expense.Amount);
+            AddExpense(expense.Category, expense.Date, expense.Description, expense.Place, expense.Amount,expense.CalendarID);
         });
         sumExpenses(); 
     }
     createGraph();
-    getApiData();
+    getCurrencyApiData();
 })
+
+
+//--------------------Calendar View-------------------//
+if(localStorage.getItem("StoredCalendarExpenses") == null){
+    var storedEvents = []
+}else{
+    var storedEvents = JSON.parse(localStorage.getItem("StoredCalendarExpenses"))
+}
+console.log(storedEvents);
+
+if(localStorage.getItem("idStoredCounter") == null){
+    var idCounter = 1000;
+}else{
+    var idCounter = JSON.parse(localStorage.getItem("idStoredCounter")); 
+}
+
+$(document).ready(function() {
+    $('#calendar').evoCalendar({
+        theme: "Royal Navy",
+        firstDayOfWeek: 1,
+        language: "en",
+        todayHighlight: true,
+        calendarEvents: storedEvents
+    })
+})
+
+function createCalEvent(event_id,event_name,event_date,event_description, event_amount) {
+    $("#calendar").evoCalendar('addCalendarEvent', [{
+        id: event_id,
+        name: event_name,// Event badge (optional)
+        date: event_date, // Date range
+        description: event_description + " - Expense Total: " + event_amount, // Event description (optional)
+        type: "event",
+        color: "darkgreen" // Event custom color (optional)
+        }
+    ]);
+}
+
+function deleteCalEvent(idGiven) {
+    $("#calendar").evoCalendar('removeCalendarEvent',parseInt(idGiven))
+    for (i = 0; i < storedEvents.length; i++) {
+        if (storedEvents[0].id == idGiven) {
+            storedEvents.splice(i,1)
+        }
+    }
+    localStorage.setItem('StoredCalendarExpenses',JSON.stringify(storedEvents));
+}
+
+function transformDate(date){
+    var newDate = date.split("-")
+    day = newDate[2]
+    month = newDate[1]
+    year = newDate[0]
+
+    if (month == "01") {
+        month = "January";
+    }else if (month == "02"){
+        month = "February";
+    }else if (month == "03"){
+        month = "March";
+    }else if (month == "04"){
+        month = "April";
+    }else if (month == "05"){
+        month = "May";
+    }else if (month == "06"){
+        month = "June";
+    }else if (month == "07"){
+        month = "July";
+    }else if (month == "08"){
+        month = "August";
+    }else if (month == "09"){
+        month = "September";
+    }else if (month == "10"){
+        month = "October";
+    }else if (month == "11"){
+        month = "November";
+    }else if (month == "12"){
+        month = "December";
+    }
+
+    return month +"/"+ day+"/"+year;
+}
+
+

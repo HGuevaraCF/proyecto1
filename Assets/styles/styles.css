@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif!important;
+}
+
 h1 {
     font-size: 22px!important;
     font-weight: 600!important;
@@ -47,6 +53,7 @@ h1 {
 
 .modalContent{
     position: fixed!important;
+    background-color: #0c4a6e!important;
     width: 40%;
     right: 30%;
     bottom: 25%;
@@ -94,6 +101,7 @@ div.scanScreen img {
     background-color: red;
 }
 
+
 .totalAmountsTable tr td {
     padding: 0% 5%;
     text-align: justify;
@@ -126,6 +134,13 @@ div.scanScreen img {
     justify-content: center;
 }
 
+.CalendarContainer{
+    margin-left: 125px ;
+    transform: scale(0.75);
+}
+.expensesTable tr {
+    word-break: break-all;
+}
 
 @media only screen and (max-width: 900px){
     .charts {
@@ -135,3 +150,10 @@ div.scanScreen img {
         align-items: center;
     }
 }
+
+@media only screen and (max-width: 780px){
+    .screenMargin{
+        padding-top: 10%!important;
+    }
+}
+
