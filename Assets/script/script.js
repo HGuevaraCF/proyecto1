@@ -283,7 +283,12 @@ function rankingCoinpaprika (data){
 getCurrencyApiData();
 
 //-------------------Dashboard behauviour-------------------//
+let myChart;
+let scndChart;
 function createGraph() {
+    if(myChart){
+        myChart.destroy();
+    }
 const BChart = document.getElementById("BarChart").getContext("2d");
 const groceriesTotal = parseInt(groceriesTotalDisplay.text());
 const foodTotal = parseInt(foodTotalDisplay.text());
@@ -292,7 +297,7 @@ const utilitiesTotal = parseInt(utilitiesTotalDisplay.text());
 const otherTotal = parseInt(otherTotalDisplay.text());
 console.log(foodTotal);
 const expensesData = [groceriesTotal, foodTotal, transportTotal, utilitiesTotal, otherTotal];
-const myChart = new Chart(BChart, {
+ myChart = new Chart(BChart, {
     type: "bar",
     responsive: true,
     data: {
@@ -330,7 +335,7 @@ const myChart = new Chart(BChart, {
 });
 
 const DChart = document.getElementById("DoughnutChart").getContext("2d");
-const scndChart = new Chart(DChart, {
+ scndChart = new Chart(DChart, {
     type: "doughnut",
     responsive: true,
     data: {
@@ -368,6 +373,7 @@ const scndChart = new Chart(DChart, {
 
 }
 
+
 //-------------Buttons trigger---------------//
 openModalBtn.on('click', modalFrameBehaviour);
 closeModalBtnX.on('click', modalFrameBehaviour);
@@ -375,12 +381,12 @@ closeModalBtnCancel.on('click', modalFrameBehaviour);
 expensesForm.on('submit', expenseSubmit);
 expensesForm.on('submit', sumExpenses);
 expensesForm.on('submit', storeExpenses);
-// expensesForm.on('submit', createGraph);
+expensesForm.on('submit', createGraph);
 expensesForm.on('submit', getCurrencyApiData);
 expenseTableBody.on('click', '.deleteRowBtn', deleteExpense);
 expenseTableBody.on('click', '.deleteRowBtn', sumExpenses);
 expenseTableBody.on('click', '.deleteRowBtn', storeExpenses);
-// expenseTableBody.on('click', '.deleteRowBtn', createGraph);
+expenseTableBody.on('click', '.deleteRowBtn', createGraph);
 expenseTableBody.on('click', '.deleteRowBtn', getCurrencyApiData);
 
 
