@@ -271,7 +271,7 @@ function rankingCoinpaprika (data){
 		trEL.appendChild(conversionEl);
 		
 
-		rankNumber.innerHTML = '#' + rank;
+		rankNumber.innerHTML = rank;
         nameEl.innerHTML = nameCripto;
 		priceEl.innerHTML = '$ ' + priceUSD.toString().substr(0,7);
 		conversionEl.innerHTML = (total/priceUSD).toString().substr(0,7);
